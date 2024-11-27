@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>Gestión de Conductores</h2>
+
+  <form (ngSubmit)="isEditing ? updateConductor() : createConductor()" class="form">
+    <label for="codigoPersona">Código Persona:</label>
+    <input id="codigoPersona" [(ngModel)]="nuevoConductor.codigoPersona" name="codigoPersona" required />
+
+    <label for="unidadMineraId">Unidad Minera ID:</label>
+    <input id="unidadMineraId" [(ngModel)]="nuevoConductor.unidadMineraId" name="unidadMineraId" required />
+
+    <label for="estado">Estado:</label>
+    <select id="estado" [(ngModel)]="nuevoConductor.estado" name="estado">
+      <option value="A">Activo</option>
+      <option value="I">Inactivo</option>
+    </select>
+
+    <button type="submit">{{ isEditing ? 'Actualizar' : 'Crear' }}</button>
+    <button type="button" (click)="isEditing = false">Cancelar</button>
+  </form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Código Persona</th>
+      <th>Unidad Minera ID</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let conductor of conductores">
+      <td>{{ conductor.conductorId }}</td>
+      <td>{{ conductor.codigoPersona }}</td>
+      <td>{{ conductor.unidadMineraId }}</td>
+      <td>{{ conductor.estado }}</td>
+      <td>
+        <button (click)="editConductor(conductor)">Editar</button>
+        <button (click)="deleteConductor(conductor.conductorId)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
